@@ -42,6 +42,16 @@ class BalancedBST {
 
     }
 
+    min(node = this.root){
+    let minValue = node.value
+     if(node.left){
+ minValue = node.left.value
+ node = node.left
+ return this.min(node.left)
+     }
+return minValue
+    }
+
     insertion(val, node = this.root){
       
       if(this.root === null){
@@ -50,49 +60,73 @@ class BalancedBST {
       }
       
       if(val < node.value){
-        console.log('Going Left!')
+        
         if(node.left === null){
           node.left = new NodeTree(val)
-          
+          console.log('going Left')
         }else{return this.insertion(val,node.left)}
         
       }
      else{
         if(node.right === null){
           node.right = new NodeTree(val)
+          console.log('going right')
         }else{return this.insertion(val,node.right)}
       }
     
     }
+
+
+    deleteNode(val,node = this.root){
+      if(!node){return null}
+
+
+
+      if(val < node.value){
+        //traverse left node
+
+          node.left = this.deleteNode(val,node.left)
+          return node
+      }else if(val > node.value){
+      //traverse right node
+        
+          node.right = this.deleteNode(val,node.right)
+          return node
+      }else{
+
+          //first case where node has no child nodes(leaf node)
+        if(node.left === null && node.right === null){
+          node = null
+          return node
+        }
+
+
+      }
+      
+return node
+
+      //end
+    }
+
+  
   
 //end of class
   }
                 
                 const balancedBST = new BalancedBST()
 
-                balancedBST.insertion(6)
+
                 balancedBST.insertion(5)
-                
-                balancedBST.insertion(2)
-                balancedBST.insertion(3)
-                balancedBST.insertion(355)
+                balancedBST.insertion(6)
+                  balancedBST.insertion(4)
+                    balancedBST.insertion(8)
+                      balancedBST.insertion(3)
+console.log(balancedBST.min())
+
+                balancedBST.deleteNode(3)
                 console.log(balancedBST.root)
 
 
 
   
 
-const prettyPrint = (node, prefix = '', isLeft = true) => { //Function for pretty printing nodetree array
-    if (node === null) {
-       return;
-    }
-    if (node.right !== null) {
-      prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
-    }
-    console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.root}`);
-    if (node.left !== null) {
-      prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
-    }
-  }
-
- prettyPrint(balancedBST.root)
