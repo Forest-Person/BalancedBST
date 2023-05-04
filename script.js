@@ -44,17 +44,30 @@ class BalancedBST {
 
     min(node = this.root){
     let minValue = node.value
-     if(node.left){
- minValue = node.left.value
- node = node.left
- return this.min(node.left)
+     
+    if(node.left){
+        
+      minValue = node.left.value
+      node = node.left
+          return this.min(node.left)
      }
-return minValue
+          return minValue
+    }
+
+    max(node = this.root){
+      let maxValue = node.value
+      if(node.right){
+        maxValue = node.right.value
+        node = node.right
+        return this.max(node.right)
+      }
+      return maxValue
     }
 
     insertion(val, node = this.root){
       
       if(this.root === null){
+        
         this.root = new NodeTree(val)
         return this.root
       }
@@ -122,7 +135,7 @@ return node
                     balancedBST.insertion(8)
                       balancedBST.insertion(3)
 console.log(balancedBST.min())
-
+console.log(balancedBST.max())
                 balancedBST.deleteNode(3)
                 console.log(balancedBST.root)
 
