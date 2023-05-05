@@ -111,6 +111,19 @@ class BalancedBST {
         if(node.left === null && node.right === null){
           node = null
           return node
+        
+        }else if(node.left === null){
+          node = node.right
+          return node
+        }else if(node.right === null){
+          node = node.left
+          return node.left
+        }
+
+        else{
+         node.value = this.min(node.right)
+         node.right = this.deleteNode(val,node.right)
+        return node
         }
 
 
@@ -136,7 +149,7 @@ return node
                       balancedBST.insertion(3)
 console.log(balancedBST.min())
 console.log(balancedBST.max())
-                balancedBST.deleteNode(3)
+                balancedBST.deleteNode(8)
                 console.log(balancedBST.root)
 
 
