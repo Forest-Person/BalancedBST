@@ -16,33 +16,41 @@ class NodeTree{
 
 class BalancedBST {
 
- constructor(){
+ constructor(arr){
+    
+    this.arr = arr.sort((a,b)=>a-b)
+    this.start = 0
+    this.end = this.arr.length
     this.root = null
  }
 
- sortedToBST(arr,start,end) {
-        
-    arr = arr.sort((a,b)=>a-b)
+ sortedToBST(arr=this.arr,start = this.start,end = this.end) {
 
+  
+    
+    
+    
     let newArr = [...arr]
 
     if(start > end){return null}
 
-    let mid  = Math.round((start + end) / 2);
+    let mid  = Math.floor((start + end) / 2);
+
+   
 
     let node = new NodeTree(newArr[mid])
 
-    node.left = this.sortedToBST(newArr, start, mid -1)
+    node.left = this.sortedToBST(newArr,start, mid -1)
 
-    node.right = this.sortedToBST(newArr, mid + 1, end)
+    node.right = this.sortedToBST(newArr,mid + 1, end)
 
     this.root = node
-    
-    return this.root
+
+    return node
 
     }
 
-    min(node = this.root){
+min(node = this.root){
     let minValue = node.value
      
     if(node.left){
@@ -138,21 +146,18 @@ return node
   
 //end of class
   }
-                
-                const balancedBST = new BalancedBST()
-
-
-                balancedBST.insertion(5)
+     
+  
+  let array1 = [33,66,57,45,234,7776,434546]
+                const balancedBST = new BalancedBST(array1)
+balancedBST.sortedToBST()
+console.log(balancedBST.root)
+               /* balancedBST.insertion(5)
                 balancedBST.insertion(6)
                   balancedBST.insertion(4)
                     balancedBST.insertion(8)
-                      balancedBST.insertion(3)
-console.log(balancedBST.min())
-console.log(balancedBST.max())
-                balancedBST.deleteNode(8)
-                console.log(balancedBST.root)
+                      balancedBST.insertion(3)*/
 
-
-
-  
-
+              
+                
+           
