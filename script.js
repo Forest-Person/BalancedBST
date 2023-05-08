@@ -141,9 +141,26 @@ min(node = this.root){
       
 
 
-      //end
+      //end of method
     }
 
+    find(val, node = this.root){
+
+if(node === null){return null}
+
+else if(val < node.value){
+  
+  return this.find(val,node.left)
+
+}else if(val > node.value){
+  
+  return this.find(val,node.right)
+}
+else{return node}
+
+
+
+    }
   
 //end of class
   }
@@ -153,7 +170,7 @@ min(node = this.root){
                 const balancedBST = new BalancedBST(array1)
 balancedBST.sortedToBST()
 //balancedBST.insertion(77777777)
-console.log(balancedBST.root)
+console.log(balancedBST.find(13))
                /* balancedBST.insertion(5)
                 balancedBST.insertion(6)
                   balancedBST.insertion(4)
