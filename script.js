@@ -20,16 +20,14 @@ class BalancedBST {
     
     this.arr = arr.sort((a,b)=>a-b)
     this.start = 0
-    this.end = this.arr.length
+    this.end = this.arr.length - 1 // if you dont put the -1 operation you will end up with one undefined value at the end of your array and sorting operation.
     this.root = null
+    this.array = []
  }
 
- sortedToBST(arr=this.arr,start = this.start,end = this.end) {
+ sortedToBST(arr = this.arr, start = this.start, end = this.end) {
 
   
-    
-    
-    
     let newArr = [...arr]
 
     if(start > end){return null}
@@ -39,6 +37,8 @@ class BalancedBST {
    
 
     let node = new NodeTree(newArr[mid])
+
+    console.log('Value is: ' + node.value)
 
     node.left = this.sortedToBST(newArr,start, mid -1)
 
@@ -86,13 +86,15 @@ min(node = this.root){
           node.left = new NodeTree(val)
           console.log('going Left')
         }else{return this.insertion(val,node.left)}
-        
+        return node.left
       }
      else{
         if(node.right === null){
           node.right = new NodeTree(val)
           console.log('going right')
+          return node.right
         }else{return this.insertion(val,node.right)}
+        
       }
     
     }
@@ -122,7 +124,7 @@ min(node = this.root){
         
         }else if(node.left === null){
           node = node.right
-          return node
+          return node.right
         }else if(node.right === null){
           node = node.left
           return node.left
@@ -137,20 +139,20 @@ min(node = this.root){
 
       }
       
-return node
+
 
       //end
     }
 
   
-  
 //end of class
   }
      
   
-  let array1 = [33,66,57,45,234,7776,434546]
+  let array1 = [4,3,2,8,7,9,10,11,13,14]
                 const balancedBST = new BalancedBST(array1)
 balancedBST.sortedToBST()
+//balancedBST.insertion(77777777)
 console.log(balancedBST.root)
                /* balancedBST.insertion(5)
                 balancedBST.insertion(6)
