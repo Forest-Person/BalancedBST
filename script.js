@@ -38,7 +38,7 @@ class BalancedBST {
 
     let node = new NodeTree(newArr[mid])
 
-    console.log('Value is: ' + node.value)
+    
 
     node.left = this.sortedToBST(newArr,start, mid -1)
 
@@ -159,9 +159,19 @@ else if(val < node.value){
 else{return node}
 
 
-
+//end of find method
     }
   
+inOrder(node = this.root){
+
+  if(node !== null){
+    this.inOrder(node.left)
+    console.log(node.value)
+    this.inOrder(node.right)
+  }
+}
+
+
 //end of class
   }
      
@@ -170,7 +180,7 @@ else{return node}
                 const balancedBST = new BalancedBST(array1)
 balancedBST.sortedToBST()
 //balancedBST.insertion(77777777)
-console.log(balancedBST.find(13))
+console.log(balancedBST.inOrder())
                /* balancedBST.insertion(5)
                 balancedBST.insertion(6)
                   balancedBST.insertion(4)
