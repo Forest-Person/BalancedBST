@@ -171,7 +171,49 @@ inOrder(node = this.root){
   }
 }
 
+preOrder(node = this.root){
 
+  if(node !== null){
+    console.log(node.value)
+    this.preOrder(node.left)
+    this.preOrder(node.right)
+  }
+
+  
+}
+
+postOrder(node = this.root){
+
+  if(node!==null){
+    this.postOrder(node.left)
+    this.postOrder(node.right)
+    console.log(node.value)
+  }
+}
+
+
+breadthFirst(){
+
+  if(!this.root){return}
+  this.queue = []
+  this.queue.push(this.root)
+  this.output = []
+
+  while(this.queue.length){
+    
+    const node = this.queue.shift()
+    
+    if(node.left){
+      this.queue.push(node.left)
+    }
+
+    if(node.right){
+      this.queue.push(node.right)
+    }
+    this.output.push(node.value)
+  }
+  return this.output
+}
 //end of class
   }
      
@@ -180,13 +222,26 @@ inOrder(node = this.root){
                 const balancedBST = new BalancedBST(array1)
 balancedBST.sortedToBST()
 //balancedBST.insertion(77777777)
-console.log(balancedBST.inOrder())
+console.log('Root value is: ' + balancedBST.root.value)
+console.log(balancedBST.breadthFirst())
                /* balancedBST.insertion(5)
                 balancedBST.insertion(6)
                   balancedBST.insertion(4)
                     balancedBST.insertion(8)
                       balancedBST.insertion(3)*/
 
-              
-                
-           
+const prettyPrint = (node, prefix = '', isLeft = true) => {
+  if (node === null) {
+      return;
+  }
+  if (node.right !== null) {
+   return prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+  }
+  console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
+  if (node.left !== null) {
+   return prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+  }
+}
+
+
+prettyPrint(balancedBST.root)
