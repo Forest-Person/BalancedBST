@@ -238,7 +238,22 @@ isBalanced(node = this.root){
 
 }
 
+getLevel(val, node = this.root, level=1){
 
+  if(node === null){return 0}
+
+  if(node.value === val){
+    return level}
+  
+    let downlevel = this.getLevel(val, node.left, level + 1)
+
+    if(downlevel !== 0){
+      return downlevel
+    }
+
+    downlevel = this.getLevel(val, node.right, level + 1)
+return downlevel
+}
 
 
 
@@ -246,24 +261,16 @@ isBalanced(node = this.root){
   }
      
   
- // let array1 = [4,3,2,8,7,9,10,11,13,14]
-                const balancedBST = new BalancedBST()
-//balancedBST.sortedToBST()
+  let array1 = [4,3,2,8,7,9,10,11,13,14]
+                const balancedBST = new BalancedBST(array1)
+balancedBST.sortedToBST()
 //balancedBST.insertion(77777777)
 //console.log('Root value is: ' + balancedBST.root.value)
-console.log(balancedBST.breadthFirst())
+console.log(balancedBST.getLevel(3))
                
 // Driver function to test the above function
-balancedBST.root = new NodeTree(1)
-balancedBST.root.left = new NodeTree(2)
-balancedBST.root.right = new NodeTree(3)
-balancedBST.root.left.left = new NodeTree(4)
-balancedBST.root.left.right = new NodeTree(5)
-balancedBST.root.left.left.left = new NodeTree(8)
-if(balancedBST.isBalanced(balancedBST.root))
-    document.write("Tree is balanced","</br>")
-else
-    document.write("Tree is not balanced","</br>")
+
+
 
 
 
