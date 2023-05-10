@@ -16,7 +16,7 @@ class NodeTree{
 
 class BalancedBST {
 
- constructor(arr){
+ constructor(arr=[]){
     
     this.arr = arr.sort((a,b)=>a-b)
     this.start = 0
@@ -214,34 +214,56 @@ breadthFirst(){
   }
   return this.output
 }
+
+heightOf(node = this.root){
+
+  if (node === null){
+    return 0
+  }
+
+  return Math.max(this.heightOf(node.left),this.heightOf(node.right)) + 1
+
+}
+
+isBalanced(node = this.root){
+  if(node === null){return true}
+
+  let lh = this.heightOf(node.left)
+  let rh = this.heightOf(node.right)
+
+  if(Math.abs(lh - rh) <= 1 && this.isBalanced(node.left) === true && this.isBalanced(node.right) === true){return true}
+
+  return false
+
+
+}
+
+
+
+
+
 //end of class
   }
      
   
-  let array1 = [4,3,2,8,7,9,10,11,13,14]
-                const balancedBST = new BalancedBST(array1)
-balancedBST.sortedToBST()
+ // let array1 = [4,3,2,8,7,9,10,11,13,14]
+                const balancedBST = new BalancedBST()
+//balancedBST.sortedToBST()
 //balancedBST.insertion(77777777)
-console.log('Root value is: ' + balancedBST.root.value)
+//console.log('Root value is: ' + balancedBST.root.value)
 console.log(balancedBST.breadthFirst())
-               /* balancedBST.insertion(5)
-                balancedBST.insertion(6)
-                  balancedBST.insertion(4)
-                    balancedBST.insertion(8)
-                      balancedBST.insertion(3)*/
-
-const prettyPrint = (node, prefix = '', isLeft = true) => {
-  if (node === null) {
-      return;
-  }
-  if (node.right !== null) {
-   return prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
-  }
-  console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
-  if (node.left !== null) {
-   return prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
-  }
-}
+               
+// Driver function to test the above function
+balancedBST.root = new NodeTree(1)
+balancedBST.root.left = new NodeTree(2)
+balancedBST.root.right = new NodeTree(3)
+balancedBST.root.left.left = new NodeTree(4)
+balancedBST.root.left.right = new NodeTree(5)
+balancedBST.root.left.left.left = new NodeTree(8)
+if(balancedBST.isBalanced(balancedBST.root))
+    document.write("Tree is balanced","</br>")
+else
+    document.write("Tree is not balanced","</br>")
 
 
-prettyPrint(balancedBST.root)
+
