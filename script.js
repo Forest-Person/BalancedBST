@@ -28,6 +28,7 @@ class BalancedBST {
  sortedToBST(arr = this.arr, start = this.start, end = this.end) {
 
   
+
     let newArr = [...arr]
 
     if(start > end){return null}
@@ -167,8 +168,10 @@ inOrder(node = this.root){
   if(node !== null){
     this.inOrder(node.left)
     console.log(node.value)
+    this.array.push(node.value)
     this.inOrder(node.right)
   }
+  return this.array
 }
 
 preOrder(node = this.root){
@@ -255,7 +258,19 @@ getLevel(val, node = this.root, level=1){
 return downlevel
 }
 
+reBalance(node = this.root){
 
+if(this.isBalanced === true){
+  return console.log('Already balanced')
+}
+
+let arrayToRebalance = this.inOrder()
+
+balancedBST.sortedToBST(arrayToRebalance)
+
+return this.root
+
+}
 
 //end of class
   }
@@ -263,10 +278,15 @@ return downlevel
   
   let array1 = [4,3,2,8,7,9,10,11,13,14]
                 const balancedBST = new BalancedBST(array1)
-balancedBST.sortedToBST()
-//balancedBST.insertion(77777777)
-//console.log('Root value is: ' + balancedBST.root.value)
-console.log(balancedBST.getLevel(3))
+                balancedBST.root = new NodeTree(1)
+                balancedBST.root.left = new NodeTree(2)
+                balancedBST.root.right = new NodeTree(3)
+                balancedBST.root.left.left = new NodeTree(4)
+                balancedBST.root.left.right = new NodeTree(5)
+                balancedBST.root.left.left.left = new NodeTree(8)
+
+//balancedBST.reBalance()
+console.log(balancedBST.isBalanced())
                
 // Driver function to test the above function
 
